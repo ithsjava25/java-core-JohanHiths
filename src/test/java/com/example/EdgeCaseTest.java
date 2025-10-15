@@ -392,4 +392,7 @@ class EdgeCaseTest {
             assertThat(stats.getCheapestProduct().name()).isEqualTo("Milk");
         }
     }
+
+    public static interface Perishable {
+    }
 }

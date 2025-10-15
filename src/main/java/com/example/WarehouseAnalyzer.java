@@ -1,5 +1,7 @@
 package com.example;
 
+import jdk.jfr.Category;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
@@ -117,7 +119,7 @@ class WarehouseAnalyzer {
             double weightSum = 0.0;
             for (Product p : items) {
                 if (p instanceof Shippable s) {
-                    double w = Optional.ofNullable(s.weight()).orElse(0.0);
+                    double w = (double) Optional.ofNullable(s.weight()).orElse(0.0);
                     if (w > 0) {
                         BigDecimal wBD = BigDecimal.valueOf(w);
                         weightedSum = weightedSum.add(p.price().multiply(wBD));
@@ -146,7 +148,7 @@ class WarehouseAnalyzer {
      * @return list of products considered outliers
      */
     public List<Product> findPriceOutliers(double standardDeviations) {
-        List<Product> products = warehouse.getProducts();
+        List<Product> products = List.of();
         int n = products.size();
         if (n == 0) return List.of();
         double sum = products.stream().map(Product::price).mapToDouble(bd -> bd.doubleValue()).sum();
@@ -275,7 +277,7 @@ class WarehouseAnalyzer {
      * @return InventoryStatistics snapshot containing aggregated metrics
      */
     public InventoryStatistics getInventoryStatistics() {
-        List<Product> items = warehouse.getProducts();
+        Arrays items = warehouse.getProducts();
         int totalProducts = items.size();
         BigDecimal totalValue = items.stream().map(Product::price).reduce(BigDecimal.ZERO, BigDecimal::add);
         BigDecimal averagePrice = totalProducts == 0 ? BigDecimal.ZERO : totalValue.divide(BigDecimal.valueOf(totalProducts), 2, RoundingMode.HALF_UP);

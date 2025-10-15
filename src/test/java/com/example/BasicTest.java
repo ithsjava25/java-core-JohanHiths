@@ -1,5 +1,6 @@
 package com.example;
 
+import com.example.Category;
 import org.junit.jupiter.api.*;
 
 import java.lang.reflect.Constructor;
@@ -8,6 +9,7 @@ import java.time.LocalDate;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
@@ -140,7 +142,7 @@ class BasicTest {
             @DisplayName("✅ should correctly remove an existing product")
             void should_removeExistingProduct() {
                 // Arrange
-                Product milk = new FoodProduct(UUID.randomUUID(), "Milk", Category.of("Dairy"), BigDecimal.TEN, LocalDate.now(), BigDecimal.ONE);
+                Product milk = new FoodProduct(UUID.randomUUID(), "Milk", (jdk.jfr.Category) Category.of("Dairy"), BigDecimal.TEN, LocalDate.now(), BigDecimal.ONE);
                 warehouse.addProduct(milk);
                 assertThat(warehouse.getProducts()).hasSize(1);
 
@@ -167,7 +169,7 @@ class BasicTest {
             @Test
             @DisplayName("✅ should return an empty map when grouping by category if empty")
             void should_returnEmptyMap_when_groupingCategoriesOnEmptyWarehouse() {
-                assertThat(warehouse.getProductsGroupedByCategories())
+P                assertThat(warehouse.getProductsGroupedByCategories())
                         .as("Grouping products by category in an empty warehouse should yield an empty map, not null.")
                         .isNotNull()
                         .isEmpty();
@@ -232,13 +234,13 @@ class BasicTest {
                 warehouse.addProduct(laptop);
 
                 // Act
-                List<Perishable> expiredItems = warehouse.expiredProducts();
+                List<EdgeCaseTest.Perishable> expiredItems = warehouse.expiredProducts();
 
                 // Assert
                 assertThat(expiredItems)
                         .as("Only products that have passed their expiration date should be returned.")
                         .hasSize(1)
-                        .containsExactly((Perishable) oldMilk);
+                        .containsExactly((EdgeCaseTest.Perishable) oldMilk);
             }
 
             @Test
