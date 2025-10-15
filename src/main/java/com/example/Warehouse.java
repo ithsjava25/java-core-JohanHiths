@@ -1,11 +1,13 @@
 package com.example;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+
 
 public class Warehouse {
 
-    // --- Singleton setup ---
     private static Warehouse instance;
 
     private final String name;
@@ -28,6 +30,7 @@ public class Warehouse {
         products.clear();
     }
 
+
     public boolean isEmpty() {
         return products.isEmpty();
     }
@@ -45,7 +48,6 @@ public class Warehouse {
         products.remove(productId);
     }
 
-
     public Optional<Product> getProductById(UUID productId) {
         return Optional.ofNullable(products.get(productId));
     }
@@ -55,6 +57,35 @@ public class Warehouse {
         return Collections.unmodifiableList(new ArrayList<>(products.values()));
     }
 
+
+    public Map<Category, List<Product>> getProductsGroupedByCategories() {
+        if (products.isEmpty()) {
+            return Collections.emptyMap();
+        }
+
+
+        return products.values().stream()
+                .collect(Collectors.groupingBy(Product::getCategory,
+                        Collectors.collectingAndThen(Collectors.toList(), Collections::unmodifiableList)));
+    }
+
+
+    public void updateProductPrice(UUID productId, BigDecimal newPrice) {
+        if (productId == null) throw new IllegalArgumentException("Product ID cannot be null.");
+        if (newPrice == null || newPrice.compareTo(BigDecimal.ZERO) < 0)
+            throw new IllegalArgumentException("New price must be non-negative.");
+
+        Product product = products.get(productId);
+        if (product == null) {
+            throw new NoSuchElementException("Product not found with id: " + productId);
+        }
+
+
+        Product updated = product.withUpdatedPrice(newPrice);
+        products.put(productId, updated);
+    }
+
+
     public String getName() {
         return name;
     }
@@ -63,4 +94,6 @@ public class Warehouse {
     public static void resetInstance() {
         instance = null;
     }
-}
+
+
+    }

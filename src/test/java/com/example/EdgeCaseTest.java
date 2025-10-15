@@ -177,7 +177,7 @@ class EdgeCaseTest {
                     new BigDecimal("5.00"), LocalDate.now().plusDays(3), new BigDecimal("1.0"))); // Weight: 1kg
 
             // Act - Calculate weighted average: (10*2 + 30*0.5 + 5*1) / (2 + 0.5 + 1) = 40/3.5 = 11.43
-            Map<Category, BigDecimal> weightedAverages = analyzer.calculateWeightedAveragePriceByCategory();
+            Map<jdk.jfr.Category, BigDecimal> weightedAverages = analyzer.calculateWeightedAveragePriceByCategory();
 
             // Assert
             assertThat(weightedAverages.get(dairy))
@@ -391,8 +391,5 @@ class EdgeCaseTest {
             assertThat(stats.getMostExpensiveProduct().name()).isEqualTo("Laptop");
             assertThat(stats.getCheapestProduct().name()).isEqualTo("Milk");
         }
-    }
-
-    public static interface Perishable {
     }
 }

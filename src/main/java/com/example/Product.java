@@ -1,7 +1,5 @@
 package com.example;
 
-import jdk.jfr.Category;
-
 import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.UUID;
@@ -11,6 +9,8 @@ import java.util.UUID;
  */
 public abstract class Product {
 
+
+    public abstract Product withUpdatedPrice(BigDecimal newPrice);
     private final UUID uuid;
     private final String name;
     private final Category category;
