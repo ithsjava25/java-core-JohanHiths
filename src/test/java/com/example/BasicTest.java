@@ -1,5 +1,7 @@
 package com.example;
 
+import com.example.Category;
+
 import org.assertj.core.api.AbstractThrowableAssert;
 import org.junit.jupiter.api.*;
 
@@ -74,7 +76,7 @@ class BasicTest {
         @Order(5)
         @DisplayName("❌ should throw IllegalArgumentException if the name is null")
         void should_throwException_when_nameIsNull() {
-            AbstractThrowableAssert<?, ? extends Throwable> o = assertThatThrownBy(() -> of(null))
+            AbstractThrowableAssert<?, ? extends Throwable> _ = assertThatThrownBy(() -> of(null))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("Category name can't be null");
         }
@@ -301,7 +303,7 @@ class BasicTest {
         }
 
 
-
+//
         @Nested
         @DisplayName("An Electronics Product")
         class ElectronicsProductTests {

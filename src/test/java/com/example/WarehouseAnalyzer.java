@@ -1,15 +1,17 @@
 package com.example;
 
+import com.example.Category;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Collectors;
-
+//
 /**
  * Analyzer class that provides advanced warehouse operations.
  */
+@SuppressWarnings("unused")
 public class WarehouseAnalyzer {
 
     private final Warehouse warehouse;
@@ -28,7 +30,7 @@ public class WarehouseAnalyzer {
             throw new IllegalArgumentException("Category cannot be null.");
         }
 
-        List<Product> result = warehouse.getProducts().stream()
+        List<Product> result = Warehouse.getProducts().stream()
                 .filter(p -> p.getCategory().equals(category))
                 .collect(Collectors.toList());
 
@@ -41,7 +43,7 @@ public class WarehouseAnalyzer {
      */
     public List<Product> findProductsInPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
         List<Product> result = new ArrayList<>();
-        for (Product p : warehouse.getProducts()) {
+        for (Product p : Warehouse.getProducts()) {
             BigDecimal price = p.price();
             if (price.compareTo(minPrice) >= 0 && price.compareTo(maxPrice) <= 0) {
                 result.add(p);
@@ -58,7 +60,7 @@ public class WarehouseAnalyzer {
         LocalDate end = today.plusDays(days);
         List<Perishable> result = new ArrayList<>();
 
-        for (Product p : warehouse.getProducts()) {
+        for (Product p : Warehouse.getProducts()) {
             if (p instanceof Perishable per) {
                 LocalDate exp = per.expirationDate();
                 if (!exp.isBefore(today) && !exp.isAfter(end)) {
@@ -76,7 +78,7 @@ public class WarehouseAnalyzer {
         String term = searchTerm.toLowerCase(Locale.ROOT);
         List<Product> result = new ArrayList<>();
 
-        for (Product p : warehouse.getProducts()) {
+        for (Product p : Warehouse.getProducts()) {
             if (p.name().toLowerCase(Locale.ROOT).contains(term)) {
                 result.add(p);
             }
@@ -89,7 +91,7 @@ public class WarehouseAnalyzer {
      */
     public List<Product> findProductsAbovePrice(BigDecimal price) {
         List<Product> result = new ArrayList<>();
-        for (Product p : warehouse.getProducts()) {
+        for (Product p : Warehouse.getProducts()) {
             if (p.price().compareTo(price) > 0) {
                 result.add(p);
             }
@@ -103,7 +105,7 @@ public class WarehouseAnalyzer {
      * Computes the weighted average price per category.
      */
     public Map<Category, BigDecimal> calculateWeightedAveragePriceByCategory() {
-        Map<Category, List<Product>> byCat = warehouse.getProducts().stream()
+        Map<Category, List<Product>> byCat = Warehouse.getProducts().stream()
                 .collect(Collectors.groupingBy(Product::getCategory));
 
         Map<Category, BigDecimal> result = new HashMap<>();
@@ -148,7 +150,7 @@ public class WarehouseAnalyzer {
         Map<Product, BigDecimal> result = new HashMap<>();
         LocalDate today = LocalDate.now();
 
-        for (Product p : warehouse.getProducts()) {
+        for (Product p : Warehouse.getProducts()) {
             BigDecimal discounted = p.price();
 
             if (p instanceof FoodProduct f) {
@@ -176,7 +178,7 @@ public class WarehouseAnalyzer {
      * Validates warehouse inventory constraints.
      */
     public InventoryValidation validateInventoryConstraints() {
-        List<Product> items = warehouse.getProducts();
+        List<Product> items = Warehouse.getProducts();
         if (items.isEmpty()) return new InventoryValidation(0.0, 0);
 
         BigDecimal highValueThreshold = new BigDecimal("1000");
@@ -197,7 +199,7 @@ public class WarehouseAnalyzer {
      * Aggregates key warehouse statistics.
      */
     public InventoryStatistics getInventoryStatistics() {
-        List<Product> items = warehouse.getProducts();
+        List<Product> items = Warehouse.getProducts();
         int totalProducts = items.size();
 
         BigDecimal totalValue = items.stream()
@@ -298,7 +300,7 @@ public class WarehouseAnalyzer {
         public BigDecimal getTotalWeight() { return totalWeight; }
         public BigDecimal getTotalShippingCost() { return totalShippingCost; }
     }
-
+        //
     public static class InventoryValidation {
         private final double highValuePercentage;
         private final int categoryDiversity;
