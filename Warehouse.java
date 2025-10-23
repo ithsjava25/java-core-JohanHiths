@@ -1,6 +1,5 @@
 package com.example;
 
-import com.example.Category;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
@@ -11,8 +10,11 @@ public class Warehouse {
     private static final Map<UUID, Product> products = new HashMap<>();
 
 
+
+//
     private Warehouse(String name) {
-    }
+       // this.name = name;
+   }
 
 
 
@@ -22,11 +24,11 @@ public class Warehouse {
         }
         return instance;
     }
-    public static Warehouse getInstance() {
+   public static Warehouse getInstance() {
         if (instance == null) {
             instance = new Warehouse("DefaultWarehouse");
         }
-        return instance;
+       return instance;
     }
 
     public void clearProducts() {
@@ -88,4 +90,3 @@ public class Warehouse {
         product.setPrice(newPrice);
     }
 }
-

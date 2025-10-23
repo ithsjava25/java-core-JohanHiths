@@ -38,7 +38,7 @@ public class Category {
         return name;
     }
 
-
+//
     public List<Product> findProductsByCategory(Category category) {
         if (category == null) {
             throw new IllegalArgumentException("Category cannot be null");

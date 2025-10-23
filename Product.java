@@ -2,7 +2,7 @@ package com.example;
 
 import java.math.BigDecimal;
 import java.util.UUID;
-import com.example.Category;
+//
 public abstract class Product {
     private final UUID uuid;
     private final String name;
@@ -42,6 +42,10 @@ public abstract class Product {
     public abstract String productDetails();
 
     public Object category() {
+        return null;
+    }
+
+    public UUID id() {
         return null;
     }
 }

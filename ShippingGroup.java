@@ -1,11 +1,9 @@
 package com.example;
 
-import com.example.Shippable;
-
 import java.math.BigDecimal;
 import java.util.*;
-import java.util.stream.Collectors;
 
+//
 class ShippingGroup {
     private final List<Shippable> products;
     private final BigDecimal totalWeight;

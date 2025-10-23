@@ -5,14 +5,14 @@ import com.example.Category;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
-
+//
 public class FoodProduct extends Product implements Perishable, Shippable {
 
     private final LocalDate expirationDate;
     private final BigDecimal weight; // in kilograms
 
     public FoodProduct(UUID uuid, String name, Category category, BigDecimal price, LocalDate expirationDate, BigDecimal weight) {
-        super(uuid, name, (com.example.Category) category, price);
+        super(uuid, name, category, price);
 
         if (price.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Price cannot be negative.");
