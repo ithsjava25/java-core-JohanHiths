@@ -1,7 +1,5 @@
 package com.example;
 
-import com.example.Category;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.UUID;
@@ -24,7 +22,7 @@ public class FoodProduct extends Product implements Perishable, Shippable {
         this.expirationDate = expirationDate;
         this.weight = weight;
     }
-
+//
     public LocalDate getExpirationDate() {
         return expirationDate;
     }

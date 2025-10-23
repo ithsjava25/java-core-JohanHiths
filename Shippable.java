@@ -7,7 +7,7 @@ public interface Shippable {
 
     BigDecimal weight();
 
-
+//
     BigDecimal calculateShippingCost();
 
     BigDecimal price();

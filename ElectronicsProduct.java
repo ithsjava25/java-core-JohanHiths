@@ -1,6 +1,6 @@
 package com.example;
 
-//import jdk.jfr.Category;
+
 import com.example.Category;
 import java.math.BigDecimal;
 import java.util.UUID;
@@ -11,7 +11,8 @@ public class ElectronicsProduct extends Product implements Shippable {
     private final BigDecimal weight; // in kilograms
 
     public ElectronicsProduct(UUID uuid, String name, Category category, BigDecimal price, int warrantyMonths, BigDecimal weight) {
-        super(uuid, name, (com.example.Category) category, price);
+        super(uuid, name, category, price);
+
 
         if (price.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Price cannot be negative.");
@@ -19,7 +20,7 @@ public class ElectronicsProduct extends Product implements Shippable {
         if (warrantyMonths < 0) {
             throw new IllegalArgumentException("Warranty months cannot be negative.");
         }
-        if (weight.compareTo(BigDecimal.ZERO) < 0) {
+        if (weight == null || weight.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Weight cannot be negative.");
         }
 
