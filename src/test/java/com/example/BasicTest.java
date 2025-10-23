@@ -28,7 +28,7 @@ class BasicTest {
     @DisplayName("A Category")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class CategoryTests {
-
+//
         @Test
         @Order(1)
         @DisplayName("✅ should not have any public constructors")
@@ -38,7 +38,7 @@ class BasicTest {
                     .as("Category should only be instantiated via its factory method, not public constructors.")
                     .isEmpty();
         }
-
+//
         @Test
         @Order(2)
         @DisplayName("✅ should be created using the 'of' factory method")
