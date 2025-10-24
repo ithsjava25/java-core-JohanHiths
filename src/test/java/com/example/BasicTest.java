@@ -56,7 +56,7 @@ class BasicTest {
                     .as("Categories with the same name should be the exact same instance to save memory.")
                     .isSameAs(category2);
         }
-
+//
         @Test
         @Order(4)
         @DisplayName("✅ should capitalize the first letter of its name automatically")
