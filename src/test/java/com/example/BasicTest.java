@@ -1,8 +1,5 @@
 package com.example;
 
-import com.example.Category;
-
-import org.assertj.core.api.AbstractThrowableAssert;
 import org.junit.jupiter.api.*;
 
 import java.lang.reflect.Constructor;
@@ -13,8 +10,6 @@ import java.util.NoSuchElementException;
 import java.util.UUID;
 
 import static com.example.Category.of;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
@@ -34,7 +29,7 @@ class BasicTest {
         @Test
         @Order(1)
         @DisplayName("✅ should not have any public constructors")
-        void should_notHavePublicConstructors() {
+         void should_notHavePublicConstructors() {
             Constructor<?>[] constructors = Category.class.getConstructors();
             assertThat(constructors)
                     .as("Category should only be instantiated via its factory method, not public constructors.")
@@ -71,16 +66,16 @@ class BasicTest {
                     .as("The category's name should be formatted with an initial capital letter.")
                     .isEqualTo("Fruit");
         }
-
+//
         @Test
         @Order(5)
         @DisplayName("❌ should throw IllegalArgumentException if the name is null")
         void should_throwException_when_nameIsNull() {
-            AbstractThrowableAssert<?, ? extends Throwable> _ = assertThatThrownBy(() -> of(null))
+            assertThatThrownBy(() -> of(null))
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("Category name can't be null");
         }
-
+//
         @Test
         @Order(6)
         @DisplayName("❌ should throw IllegalArgumentException if the name is empty")
@@ -108,7 +103,7 @@ class BasicTest {
     @DisplayName("A Warehouse")
     class WarehouseTests {
 
-        private Warehouse warehouse;
+        public Warehouse warehouse;
 
         @BeforeEach
         void setUp() {
@@ -146,7 +141,7 @@ class BasicTest {
             @DisplayName("✅ should correctly remove an existing product")
             void should_removeExistingProduct() {
                 // Arrange
-                Product milk = new FoodProduct(UUID.randomUUID(), "Milk", (Category) of("Dairy"), BigDecimal.TEN, LocalDate.now(), BigDecimal.ONE);
+                Product milk = new FoodProduct(UUID.randomUUID(), "Milk", of("Dairy"), BigDecimal.TEN, LocalDate.now(), BigDecimal.ONE);
                 warehouse.addProduct(milk);
                 assertThat(Warehouse.getProducts()).hasSize(1);
 
@@ -217,8 +212,8 @@ class BasicTest {
                 @DisplayName("✅ should allow polymorphic behavior on productDetails() method")
                 void should_demonstratePolymorphism_when_callingProductDetails() {
 
-                    Product milk = new FoodProduct(UUID.randomUUID(), "Milk", (Category) of("Dairy"), new BigDecimal("15.50"), LocalDate.of(2025, 12, 24), new BigDecimal("1.0"));
-                    Product laptop = new ElectronicsProduct(UUID.randomUUID(), "Laptop", (Category) of("Electronics"), new BigDecimal("12999"), 24, new BigDecimal("2.2"));
+                    Product milk = new FoodProduct(UUID.randomUUID(), "Milk", of("Dairy"), new BigDecimal("15.50"), LocalDate.of(2025, 12, 24), new BigDecimal("1.0"));
+                    Product laptop = new ElectronicsProduct(UUID.randomUUID(), "Laptop", of("Electronics"), new BigDecimal("12999"), 24, new BigDecimal("2.2"));
 
 
                     assertThat(milk.productDetails()).isEqualTo("Food: Milk, Expires: 2025-12-24");
@@ -229,9 +224,9 @@ class BasicTest {
                 @DisplayName("✅ should find all expired products using the Perishable interface")
                 void should_findExpiredProducts_when_checkingPerishables() {
 
-                    Product freshMilk = new FoodProduct(UUID.randomUUID(), "Fresh Milk", (Category) of("Dairy"), new BigDecimal("15"), LocalDate.now().plusDays(5), new BigDecimal("1.0"));
-                    Product oldMilk = new FoodProduct(UUID.randomUUID(), "Old Milk", (Category) of("Dairy"), new BigDecimal("10"), LocalDate.now().minusDays(2), new BigDecimal("1.0"));
-                    Product laptop = new ElectronicsProduct(UUID.randomUUID(), "Laptop", (Category) of("Electronics"), new BigDecimal("9999"), 24, new BigDecimal("2.5")); // Not perishable
+                    Product freshMilk = new FoodProduct(UUID.randomUUID(), "Fresh Milk", of("Dairy"), new BigDecimal("15"), LocalDate.now().plusDays(5), new BigDecimal("1.0"));
+                    Product oldMilk = new FoodProduct(UUID.randomUUID(), "Old Milk", of("Dairy"), new BigDecimal("10"), LocalDate.now().minusDays(2), new BigDecimal("1.0"));
+                    Product laptop = new ElectronicsProduct(UUID.randomUUID(), "Laptop", of("Electronics"), new BigDecimal("9999"), 24, new BigDecimal("2.5")); // Not perishable
                     warehouse.addProduct(freshMilk);
                     warehouse.addProduct(oldMilk);
                     warehouse.addProduct(laptop);
@@ -250,8 +245,8 @@ class BasicTest {
                 @DisplayName("✅ should calculate total shipping cost using the Shippable interface")
                 void should_calculateTotalShippingCost_when_summingShippableItems() {
 
-                    Product milk = new FoodProduct(UUID.randomUUID(), "Milk", (Category) of("Dairy"), new BigDecimal("15"), LocalDate.now().plusDays(5), new BigDecimal("1.2")); // Shipping: 1.2 * 50 = 60
-                    Product heavyLaptop = new ElectronicsProduct(UUID.randomUUID(), "Heavy Laptop", (Category) of("Electronics"), new BigDecimal("15000"), 24, new BigDecimal("6.0")); // Shipping: 79 + 49 = 128
+                    Product milk = new FoodProduct(UUID.randomUUID(), "Milk", of("Dairy"), new BigDecimal("15"), LocalDate.now().plusDays(5), new BigDecimal("1.2")); // Shipping: 1.2 * 50 = 60
+                    Product heavyLaptop = new ElectronicsProduct(UUID.randomUUID(), "Heavy Laptop", of("Electronics"), new BigDecimal("15000"), 24, new BigDecimal("6.0")); // Shipping: 79 + 49 = 128
                     warehouse.addProduct(milk);
                     warehouse.addProduct(heavyLaptop);
 
@@ -279,7 +274,7 @@ class BasicTest {
                 assertThatThrownBy(() -> new FoodProduct(
                         UUID.randomUUID(),
                         "Expired Milk",
-                        (Category) of("Dairy"),
+                        of("Dairy"),
                         new BigDecimal("-10.00"), // Invalid price
                         LocalDate.now(),
                         BigDecimal.ONE))
@@ -293,7 +288,7 @@ class BasicTest {
                 assertThatThrownBy(() -> new FoodProduct(
                         UUID.randomUUID(),
                         "Anti-Gravity Milk",
-                        (Category) of("Dairy"),
+                        of("Dairy"),
                         BigDecimal.TEN,
                         LocalDate.now(),
                         new BigDecimal("-1.0"))) // Invalid weight
@@ -314,7 +309,7 @@ class BasicTest {
                 assertThatThrownBy(() -> new ElectronicsProduct(
                         UUID.randomUUID(),
                         "Time Machine",
-                        (Category) of("Gadgets"),
+                        of("Gadgets"),
                         BigDecimal.valueOf(9999),
                         -12, //
                         BigDecimal.TEN))
