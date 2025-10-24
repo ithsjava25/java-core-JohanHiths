@@ -1,7 +1,6 @@
 package com.example;
 
-import com.example.Category;
-
+//
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
@@ -9,14 +8,14 @@ import java.util.stream.Collectors;
 
 public class Warehouse {
     private static Warehouse instance;
+
     private static final Map<UUID, Product> products = new HashMap<>();
 
-//
-
+    //
+ //
 //
     private Warehouse(String name) {
-       // this.name = name;
-   }
+    }
 
 
 

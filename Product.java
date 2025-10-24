@@ -1,15 +1,14 @@
 package com.example;
 
-import com.example.Category;
 import java.math.BigDecimal;
 import java.util.UUID;
-
+//
 public abstract class Product {
     private final UUID uuid;
     private final String name;
     private final Category category;
     private BigDecimal price;
-
+//
     public Product(UUID uuid, String name, Category category, BigDecimal price) {
         if (price == null || price.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Price cannot be negative.");

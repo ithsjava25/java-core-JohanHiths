@@ -1,10 +1,9 @@
 package com.example;
 
 
-import com.example.Category;
 import java.math.BigDecimal;
 import java.util.UUID;
-//
+/// /
 public class ElectronicsProduct extends Product implements Shippable {
 
     private final int warrantyMonths;
@@ -27,10 +26,8 @@ public class ElectronicsProduct extends Product implements Shippable {
         this.warrantyMonths = warrantyMonths;
         this.weight = weight;
     }
+//
 
-    public int getWarrantyMonths() {
-        return warrantyMonths;
-    }
 
     @Override
     public BigDecimal weight() {

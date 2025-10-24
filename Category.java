@@ -1,10 +1,8 @@
 package com.example;
 
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 //
 public class Category {
@@ -38,8 +36,8 @@ public class Category {
     public String getName() {
         return name;
     }
-
 //
+/// /
     public List<Product> findProductsByCategory(Category category) {
         if (category == null) {
             throw new IllegalArgumentException("Category cannot be null");
@@ -50,7 +48,7 @@ public class Category {
                 .toList();
     }
 
-
+//
 
     @Override
     public boolean equals(Object o) {
