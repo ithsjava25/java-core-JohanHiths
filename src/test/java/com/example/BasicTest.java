@@ -66,7 +66,7 @@ class BasicTest {
                     .as("The category's name should be formatted with an initial capital letter.")
                     .isEqualTo("Fruit");
         }
-//
+/// /
         @Test
         @Order(5)
         @DisplayName("❌ should throw IllegalArgumentException if the name is null")
