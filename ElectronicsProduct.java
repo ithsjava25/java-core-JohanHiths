@@ -4,7 +4,7 @@ package com.example;
 import java.math.BigDecimal;
 import java.util.UUID;
 
-/// //
+/// ////
 public class ElectronicsProduct extends Product implements Shippable {
 
     private final int warrantyMonths;

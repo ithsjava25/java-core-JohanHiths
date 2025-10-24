@@ -36,7 +36,7 @@ public class WarehouseAnalyzer {
         Collections.reverse(result);
         return result;
     }
-/// /////
+/// //////
 
     public List<Product> findProductsInPriceRange(BigDecimal minPrice, BigDecimal maxPrice) {
         List<Product> result = new ArrayList<>();

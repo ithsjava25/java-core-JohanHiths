@@ -4,7 +4,7 @@ package com.example;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-/// /////
+/// /////////
 public class Category {
 
     private static final Map<String, Category> CACHE = new ConcurrentHashMap<>();
