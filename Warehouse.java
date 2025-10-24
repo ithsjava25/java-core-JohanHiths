@@ -11,11 +11,9 @@ public class Warehouse {
 
     private static final Map<UUID, Product> products = new HashMap<>();
 
-    //
- //
-//
-    private Warehouse(String name) {
+    public Warehouse(String name) {
     }
+
 
 
 
@@ -25,7 +23,7 @@ public class Warehouse {
         }
         return instance;
     }
-   public static Warehouse getInstance() {
+   protected static Warehouse getInstance() {
         if (instance == null) {
             instance = new Warehouse("DefaultWarehouse");
         }
@@ -56,7 +54,7 @@ public class Warehouse {
 
     public static List<Product> getProducts() {
 
-        return Collections.unmodifiableList(new ArrayList<>(products.values()));
+        return List.copyOf(products.values());
     }
 
     public Map<Category, List<Product>> getProductsGroupedByCategories() {
