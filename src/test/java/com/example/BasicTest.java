@@ -12,7 +12,7 @@ import java.util.UUID;
 import static com.example.Category.of;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-//
+/// /
 /**
  * A collection of tests for the business domain classes.
  */
