@@ -2,6 +2,12 @@ package com.example;
 
 
 import org.junit.jupiter.api.*;
+import com.example.Warehouse;
+import com.example.Product;
+import com.example.FoodProduct;
+import com.example.ElectronicsProduct;
+import com.example.Perishable;
+import com.example.Shippable;
 
 
 import java.lang.reflect.Constructor;
