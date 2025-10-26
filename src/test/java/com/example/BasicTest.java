@@ -33,17 +33,17 @@ class BasicTest {
     @DisplayName("A Category")
     @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
     class CategoryTests {
-//
+        //
         @Test
         @Order(1)
         @DisplayName("✅ should not have any public constructors")
-         void should_notHavePublicConstructors() {
+        void should_notHavePublicConstructors() {
             Constructor<?>[] constructors = Category.class.getConstructors();
             assertThat(constructors)
                     .as("Category should only be instantiated via its factory method, not public constructors.")
                     .isEmpty();
         }
-//
+        //
         @Test
         @Order(2)
         @DisplayName("✅ should be created using the 'of' factory method")
@@ -64,7 +64,7 @@ class BasicTest {
                     .as("Categories with the same name should be the exact same instance to save memory.")
                     .isSameAs(category2);
         }
-//
+        //
         @Test
         @Order(4)
         @DisplayName("✅ should capitalize the first letter of its name automatically")
@@ -74,7 +74,7 @@ class BasicTest {
                     .as("The category's name should be formatted with an initial capital letter.")
                     .isEqualTo("Fruit");
         }
-/// /
+        /// /
         @Test
         @Order(5)
         @DisplayName("❌ should throw IllegalArgumentException if the name is null")
@@ -83,7 +83,7 @@ class BasicTest {
                     .isInstanceOf(IllegalArgumentException.class)
                     .hasMessage("Category name can't be null");
         }
-//
+        //
         @Test
         @Order(6)
         @DisplayName("❌ should throw IllegalArgumentException if the name is empty")
@@ -306,7 +306,7 @@ class BasicTest {
         }
 
 
-//
+        //
         @Nested
         @DisplayName("An Electronics Product")
         class ElectronicsProductTests {
